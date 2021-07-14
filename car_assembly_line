@@ -8,17 +8,22 @@ build the car:
         - mkdir build
         - cd build
         - touch car.txt
-        - echo "chassis" > car.txt
-        - echo "engine"  > car.txt
-        - echo "wheels"  > car.txt
+        - echo "chassis" >> car.txt
+        - echo "engine"  >> car.txt
+        - echo "wheels"  >> car.txt
+        - cat car.txt
         - echo "Were done with build the car"
+    artifacts:
+        paths:
+          - build/  
     
 test the car:
     stage: test
     script:
-        - test -f "build/info.txt"
+        - test -f "build/car.txt"
         - cd build
         - grep "chassis" car.txt
         - grep "engine"  car.txt
         - grep "wheels"  car.txt
+        - ls -l
         - echo "Were done with test the car"
