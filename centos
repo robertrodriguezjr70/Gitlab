@@ -1,0 +1,7 @@
+build node:
+  image: centos:7.9.2009
+  script:
+    - yum update -y
+    - yum install net-tools -y
+  artifacts:
+    #- ./public
