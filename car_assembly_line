@@ -1,29 +1,29 @@
-stages:
-    - build
-    - test
+build node:
+  stage: build
+  image: centos:7.9.2009
+  script:
+    - yum update -y
+    - yum install net-tools -y
+    - mkdir build
+    - cd build
+    - touch installed.txt
+    - echo "centos installed" > installed.txt
+  artifacts:
+    paths:
+      - build/
 
-build the car:
-    stage: build
-    script:
-        - mkdir build
-        - cd build
-        - touch car.txt
-        - echo "chassis" >> car.txt
-        - echo "engine"  >> car.txt
-        - echo "wheels"  >> car.txt
-        - cat car.txt
-        - echo "Were done with build the car"
-    artifacts:
-        paths:
-          - build/  
-    
-test the car:
+test node:
     stage: test
     script:
-        - test -f "build/car.txt"
-        - cd build
-        - grep "chassis" car.txt
-        - grep "engine"  car.txt
-        - grep "wheels"  car.txt
-        - ls -l
-        - echo "Were done with test the car"
+    - test -f "build/installed.txt"
+    - cd build
+    - grep "centos installed" installed.txt
+    - echo "test complete"
+#        - test -f "build/car.txt"
+#        - cd build
+#        - grep "chassis" car.txt
+#        - grep "engine"  car.txt
+#        - grep "wheels"  car.txt
+#        - ls -l
+#       - echo "Were done with test the car"
+
